@@ -1,33 +1,33 @@
-import { useState, useEffect } from "react" ;
+import { useState} from "react";
 
 
+const Contador = ({ inicial, stock, funcionAgregar }) => {
+    const [contador, setContador] = useState(inicial);
 
-
-const Contador = () => {
-    const [contador, setContador] = useState(1);
-
-    useEffect(()=> {
-        document.title = `Contador: ${contador} `;
-
-    }, [contador])
 
     const sumarContador = () => {
-        setContador(contador + 1);
+        if (contador < stock) {
+            setContador(contador + 1);
+        }
     }
 
     const restarContador = () => {
-        setContador(contador - 1);
+        if (contador > inicial) {
+            setContador(contador - 1);
+        }
     }
 
+    return (
+        <>
+            <div>
+                <button onClick={restarContador}> - </button>
+                <strong> {contador} </strong>
+                <button onClick={sumarContador}> + </button>
+            </div>
+            <button onClick={()=> funcionAgregar(contador)}> Agregar al Carrito </button>
+        </>
 
-  return (
-    <div>
-        <button onClick={restarContador}> - </button>
-        <strong> {contador} </strong>
-        <button onClick={sumarContador}> + </button>
-        
-    </div>
-  )
+    )
 }
 
 export default Contador
